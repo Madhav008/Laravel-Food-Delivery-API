@@ -27,7 +27,8 @@ class ProductsController extends Controller
             'description' => 'required|max:255|string',
             'restaurant_id' => 'required',
             'category_id' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'image_url'=>'required|string'
 
         ]);
 
@@ -41,6 +42,7 @@ class ProductsController extends Controller
         $products->restaurant_id=$request->input('restaurant_id');
         $products->category_id=$request->input('category_id');
         $products->price=$request->input('price');
+        $products->image_url=$request->input('image_url');
 
         if($products->save()){
             return $products;

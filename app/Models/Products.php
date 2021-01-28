@@ -14,7 +14,9 @@ class Products extends Model
         'description',
         'restaurant_id',
         'category_id',
-        'price'
+        'price',
+        'discount',
+        'image_url',
     ];
 
 

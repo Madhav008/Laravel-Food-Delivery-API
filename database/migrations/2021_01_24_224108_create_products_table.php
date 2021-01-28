@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->integer('price');
-            $table->integer('discount');
+            $table->integer('discount')->nullable();
             $table->string('image_url');
             $table->timestamps();
         });

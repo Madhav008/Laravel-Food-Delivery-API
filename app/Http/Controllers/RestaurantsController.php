@@ -31,6 +31,7 @@ class RestaurantsController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
             'description' => 'required',
+            'image_url'=>'required|string'
 
         ]);
 
@@ -41,6 +42,7 @@ class RestaurantsController extends Controller
         $restaurants->id = $request->input('restaurants_id');
         $restaurants->name = $request->input('name');
         $restaurants->description = $request->input('description');
+        $restaurants->image_url= $request->input('image_url');
 
         if ($restaurants->save()) {
             return $restaurants;
