@@ -38,8 +38,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255|string|unique',
+            'name' => 'required|max:255|string|unique:categories',
             'restaurant_id' => 'required',
+            'image_url'=>'required|string'
 
         ]);
 
@@ -50,6 +51,7 @@ class CategoryController extends Controller
         $category->id = $request->input('category_id');
         $category->name = $request->input('name');
         $category->restaurant_id = $request->input('restaurant_id');
+        $category->image_url = $request->input('image_url');
 
 
         if ($category->save()) {
