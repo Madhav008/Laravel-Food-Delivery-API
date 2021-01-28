@@ -32,7 +32,6 @@ Route::group(['prefix' => 'auth'], function () {
 
 });
 
-Route::get("customer/{id}", [UserController::class, 'allUser']);
 Route::apiResource('products', ProductsController::class);
 Route::apiResource('restaurants', RestaurantsController::class);
 Route::apiResource('order', OrderController::class);
