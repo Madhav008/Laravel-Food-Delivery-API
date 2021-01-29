@@ -52,9 +52,15 @@ class OrderController extends Controller
     }
 
    
-    public function update(Request $request, Order $order)
+    public function update(Request $request,   $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $order->update($request->all());
+        
+        if ($order->save()) {
+            return $order;
+        }
     }
 
     

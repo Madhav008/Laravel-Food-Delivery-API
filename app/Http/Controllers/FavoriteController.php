@@ -11,15 +11,19 @@ class FavoriteController extends Controller
     
     public function index()
     {
+        $favs =  Favorite::all();
+
+        foreach($favs as $value){
+            return $value->products;
+        }
     
-        return Favorite::all();
     }
 
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_id' => 'required|max:255|string',
+            'product_id' => 'required|max:255|',
             'user_id' => 'required',
 
         ]);
@@ -44,15 +48,15 @@ class FavoriteController extends Controller
     }
 
  
-    public function edit(Favorite $favorite)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $fav = Favorite::findOrFail($id);
 
- 
-    public function update(Request $request, Favorite $favorite)
-    {
-        //
+        $fav->update($request->all());
+        
+        if ($fav->save()) {
+            return $fav;
+        }
     }
 
     public function destroy($id)

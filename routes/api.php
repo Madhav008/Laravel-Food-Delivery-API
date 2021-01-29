@@ -21,6 +21,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::put("user",[UserController::class,'update']);
     
     Route::post("imageUpload", [ImageController::class, 'upload']);
+    Route::apiResource('orderItem', OrderItemController::class);
+    Route::apiResource('order', OrderController::class);
+    Route::apiResource('favorite', FavoriteController::class);
     Route::get("logout", [UserController::class, 'logout']);
 });
 
@@ -34,8 +37,5 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::apiResource('products', ProductsController::class);
 Route::apiResource('restaurants', RestaurantsController::class);
-Route::apiResource('order', OrderController::class);
-Route::apiResource('orderItem', OrderItemController::class);
-Route::apiResource('favorite', FavoriteController::class);
 Route::apiResource('category', CategoryController::class);
 Route::get("/category/product/{id}",[CategoryController::class,'showProductbyCategory']);
