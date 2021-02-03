@@ -9,14 +9,20 @@ use Illuminate\Support\Facades\Validator;
 class FavoriteController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $favs =  Favorite::all();
 
+        $user_id = $request->user()->id;
+
+        $favs =  Favorite::where('user_id',$user_id)->get();
+
+        $favproducts= array();
         foreach($favs as $value){
-            return $value->products;
+            
+            array_push($favproducts,$value->products) ;
+
         }
-    
+        return $favproducts;
     }
 
 
@@ -31,6 +37,9 @@ class FavoriteController extends Controller
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()]);
         }
+        if($request->user()->id == $request->input('user_id')){
+
+        
         $favorites = $request->isMethod('put') ? Favorite::findOrFail($request->favorites_id) : new Favorite;
         $favorites->id = $request->input('favorite_id');
         $favorites->product_id = $request->input('product_id');
@@ -39,6 +48,7 @@ class FavoriteController extends Controller
         if ($favorites->save()) {
             return $favorites;
         }
+    }
     }
 
     public function show($id)
@@ -59,9 +69,13 @@ class FavoriteController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request,  $id)
     {
-        $favorites = Favorite::destroy($id);
-        return $favorites;
+        
+        $userid =$request->user()->id; 
+        $favs =  Favorite::where('user_id',$userid)->where('product_id',$id)->delete();
+        
+        return $favs;
+       
     }
 }

@@ -20,17 +20,25 @@ class Products extends Model
     ];
 
 
-    public function reastaurants(){
-        return $this->belongsTo(Restaurants::class,'restaurant_id');
+    public function reastaurants()
+    {
+        return $this->belongsTo(Restaurants::class, 'restaurant_id');
     }
-    
-    public function category(){
-        return $this->belongsTo(Category::class,'category_id');
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
-    public function favorites(){
+    public function favorites()
+    {
         return $this->hasMany(Favorite::class);
     }
-    public function orderItem(){
+    public function orderItem()
+    {
         return $this->hasMany(OrderItem::class);
+    }
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
     }
 }
